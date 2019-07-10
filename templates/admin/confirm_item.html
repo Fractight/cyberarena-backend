@@ -1,0 +1,12 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+<form action='' method='POST'>
+    Id: {{ item_info.id }} <br>
+    Name: {{ item_info.name }} <br>
+    Probability: {{ item_info.probability }} <br>
+
+    {{ form.hidden_tag() }}
+    {{ form.submit() }}
+</form>
+{% endblock body %}

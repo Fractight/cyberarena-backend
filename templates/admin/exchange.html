@@ -1,0 +1,10 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+<form action='' method='POST'>
+    {{ form.hidden_tag() }}
+    <span>Введи код:</span>
+    {{ form.code(size=32) }}
+    {{ form.submit() }}
+</form>
+{% endblock body %}
