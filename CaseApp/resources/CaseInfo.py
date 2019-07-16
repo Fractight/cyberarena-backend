@@ -12,7 +12,7 @@ items_schema = ItemSchema(many=True)
 class CaseInfo(Resource):
     @jwt_required
     def get(self, case_id):
-        case = Case.get(case_id)
+        case = Case.query.get(case_id)
         items = Item.query.filter_by(case_id=case.id)
 
         case = case_schema.dump(case).data

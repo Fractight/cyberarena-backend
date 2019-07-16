@@ -8,7 +8,7 @@ item_schema = ItemSchema()
 
 class ItemActivate(Resource):
     @jwt_required
-    def post(self, item_id):
+    def patch(self, item_id):
         user_id = User.find_by_login(get_jwt_identity()).id
         item = Inventory.query.get(item_id)
         if not item or item.user_id != user_id:

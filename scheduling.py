@@ -1,15 +1,11 @@
-from CaseApp.models import Inventory
+from UserApp.schedule_funcs import *
+from NewsApp.schedule_funcs import *
 from apscheduler.schedulers.background import BackgroundScheduler
 import atexit
-from settings import app
-
-def delete_expired_items():
-    with app.app_context():
-        rows_deleted = Inventory.query.filter(Inventory.is_expired).delete()
-        print(rows_deleted)
 
 scheduler = BackgroundScheduler()
 scheduler.add_job(delete_expired_items, 'interval', seconds=3600)
+scheduler.add_job(refresh_news, 'interval', seconds=5)
 scheduler.start()
 
 atexit.register(lambda: scheduler.shutdown())

@@ -5,7 +5,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 inventory_schema = InventorySchema(many=True)
 
-class InventoryResource(Resource):
+class ItemsInfo(Resource):
     @jwt_required
     def get(self):
         user_login = get_jwt_identity()
@@ -14,4 +14,4 @@ class InventoryResource(Resource):
         items = Inventory.query.filter_by(user_id = user.id)
         items = inventory_schema.dump(items).data
 
-        return { "status": 'success', 'items': items }, 201
+        return {'items': items}, 201
