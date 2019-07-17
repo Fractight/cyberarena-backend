@@ -68,19 +68,18 @@ class Inventory(db.Model):
     def expires_in(self):
         return (self.expiration - datetime.datetime.now()).total_seconds()
 
-class ItemSchema(ma.Schema):
-    id = fields.Integer(dump_only=True)
-    name = fields.String(required=True)
-    description = fields.String()
-    probability = fields.Float(required=True)
-    case_id = fields.Integer(required=True)
+class ItemSchema(ma.ModelSchema):
+    class Meta:
+        model = Item
 
-class CaseSchema(ma.Schema):
-    id = fields.Integer(dump_only=True)
-    name = fields.String(required=True)
-    description = fields.String()
+class CaseSchema(ma.ModelSchema):
+    class Meta:
+        model = Case
+        exclude = ('items',)
 
-class InventorySchema(ma.Schema):
-    id = fields.Integer(dump_only=True)
-    user_id = fields.Integer(required=True)
-    item_id = fields.Integer(required=True)
+class InventorySchema(ma.ModelSchema):
+    class Meta:
+        model = Inventory
+        exclude = ('user',)
+    item = ma.Nested(ItemSchema)
+

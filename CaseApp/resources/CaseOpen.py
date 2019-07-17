@@ -18,7 +18,6 @@ class CaseOpen(Resource):
             return {'message': "Case doesn't exists"}, 400
 
         items = Item.query.filter_by(case_id=case_id)
-
         items = [item for item in items]
         p_distr = [item.probability for item in items]
 
@@ -34,7 +33,6 @@ class CaseOpen(Resource):
 
         db.session.add(inv)
         db.session.commit()
+        reward = item_schema.dump(reward).data
 
-        reward = item_schema.dumps(reward).data
-
-        return { "status": 'success', 'reward': reward }, 201
+        return { 'reward': reward }, 201

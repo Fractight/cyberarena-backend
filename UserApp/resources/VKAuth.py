@@ -19,7 +19,7 @@ class VKAuth(Resource):
             params={
                 'client_id': app.config.get('VK_CLIENT_ID'),
                 'client_secret': app.config.get('VK_CLIENT_SECRET'),
-                'redirect_uri': url_for('.vkauth', _external=True, _scheme='https'),
+                'redirect_uri': url_for('.vkauth', _external=True, _scheme='http'),
                 'code': code,
             }
         )
