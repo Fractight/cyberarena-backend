@@ -19,7 +19,41 @@
 | :------------------------- | ---------------------- |
 | **Метод**                  | GET                    |
 | ***Требует access_token*** |                        |
-
+```json
+{
+    "case": {
+        "description": "Скидки на покупку времени",
+        "name": "Скидки",
+        "id": 1
+    },
+    "items": [
+        {
+            "name": "Скидка на игру за ПК",
+            "probability": 0.1,
+            "description": "Скидка 20%",
+            "expiration_period": 3600,
+            "case": 1,
+            "id": 1
+        },
+        {
+            "name": "Скидка на игру за консолью",
+            "probability": 0.7,
+            "description": "Скидка 30%",
+            "expiration_period": 3600,
+            "case": 1,
+            "id": 2
+        },
+        {
+            "name": "Скидка на игру за ПК",
+            "probability": 0.2,
+            "description": "Скидка 30%",
+            "expiration_period": 3600,
+            "case": 1,
+            "id": 3
+        }
+    ]
+}
+```
 #### **Все предметы пользователя**
 
 | Эндпоинт                   | /shop/items |
