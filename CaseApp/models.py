@@ -4,8 +4,10 @@ from settings import db, ma
 import secrets
 from string import ascii_uppercase, digits
 import datetime
+from ImageApp.models import ImageSchema
 
 code_simbols = ascii_uppercase + digits
+
 
 class Item(db.Model):
     __tablename__ = 'items'
@@ -14,30 +16,26 @@ class Item(db.Model):
     description = db.Column(db.Text)
     probability = db.Column(db.Float, nullable=False)
     expiration_period = db.Column(db.Integer, default=3600)
-    case_id = db.Column(db.Integer, db.ForeignKey('cases.id', ondelete='CASCADE'), nullable=True)
-
-    def __init__(self, name='', description='', probability=0.0, case_id=None):
-        self.name = name
-        self.description = description
-        self.probability = probability
-        self.case_id = case_id
+    image_id = db.Column(db.Integer, db.ForeignKey('image.id'))
+    image = db.relationship('Image', backref=db.backref('item_image'))
+    case_id = db.Column(db.Integer, db.ForeignKey('cases.id', ondelete='CASCADE'))
 
     def __str__(self):
         return str(self.name) + ', ' + str(self.id)
 
+
 class Case(db.Model):
     __tablename__ = 'cases'
-    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text)
+    image_id = db.Column(db.Integer, db.ForeignKey('image.id'))
+    image = db.relationship('Image', backref=db.backref('case_image'))
     items = db.relationship('Item', backref=db.backref('case'))
-
-    def __init__(self, name='', description=''):
-        self.name = name
-        self.description = description
 
     def __str__(self):
         return self.name
+
 
 class Inventory(db.Model):
     __tablename__ = 'inventory'
@@ -48,10 +46,6 @@ class Inventory(db.Model):
     item = db.relationship('Item')
     code = db.Column(db.String(8), unique=True)
     expiration = db.Column(db.DateTime)
-
-    def __init__(self, user_id, item_id):
-        self.user_id = user_id
-        self.item_id = item_id
 
     @hybrid_property
     def is_expired(self):
@@ -68,18 +62,27 @@ class Inventory(db.Model):
     def expires_in(self):
         return (self.expiration - datetime.datetime.now()).total_seconds()
 
+
 class ItemSchema(ma.ModelSchema):
     class Meta:
         model = Item
+
+    image = ma.Nested(ImageSchema, only=['url'])
+
 
 class CaseSchema(ma.ModelSchema):
     class Meta:
         model = Case
         exclude = ('items',)
 
+    image = ma.Nested(ImageSchema, only=['url'])
+
+
 class InventorySchema(ma.ModelSchema):
     class Meta:
         model = Inventory
         exclude = ('user',)
     item = ma.Nested(ItemSchema)
+
+
 

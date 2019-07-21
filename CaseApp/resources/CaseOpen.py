@@ -3,12 +3,13 @@ from CaseApp.models import Case, CaseSchema, Item, ItemSchema, Inventory
 from UserApp.models import User
 from settings import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from random import choices
+from random import choice
 
 cases_schema = CaseSchema(many=True)
 case_schema = CaseSchema()
 
 item_schema = ItemSchema()
+
 
 class CaseOpen(Resource):
     @jwt_required
@@ -21,7 +22,7 @@ class CaseOpen(Resource):
         items = [item for item in items]
         p_distr = [item.probability for item in items]
 
-        reward = choices(population=items, weights=p_distr)[0]
+        reward = choice(population=items, weights=p_distr)
 
         user_login = get_jwt_identity()
         user_id = User.find_by_login(login=user_login).id

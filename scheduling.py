@@ -1,4 +1,4 @@
-from UserApp.schedule_funcs import *
+from CaseApp.schedule_funcs import *
 from NewsApp.schedule_funcs import *
 from apscheduler.schedulers.background import BackgroundScheduler
 import atexit

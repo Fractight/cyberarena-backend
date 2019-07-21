@@ -10,6 +10,7 @@ roles_users = db.Table(
     db.Column('role_id', db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))
 )
 
+
 # Role class
 class Role(db.Model, RoleMixin):
 
@@ -25,6 +26,7 @@ class Role(db.Model, RoleMixin):
     # __hash__ is required to avoid the exception TypeError: unhashable type: 'Role' when saving a User
     def __hash__(self):
         return hash(self.name)
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -62,11 +64,11 @@ class User(db.Model, UserMixin):
     def find_by_login(login):
         return User.query.filter_by(login=login).first()
 
-class UserSchema(ma.Schema):
-    id = fields.Integer()
-    login = fields.String(required=True)
-    password = fields.String(required=True)
-    email = fields.String()
-    active = fields.Boolean()
+
+class UserSchema(ma.ModelSchema):
+    class Meta:
+        model = User
+
+
 
 

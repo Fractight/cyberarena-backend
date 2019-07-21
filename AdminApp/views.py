@@ -1,14 +1,17 @@
 from flask import redirect, request, url_for, flash, render_template, abort
-from flask_admin import expose, AdminIndexView, BaseView
+from flask_admin import expose, AdminIndexView, BaseView, form
 from flask_admin.contrib.sqla import ModelView as BaseModelView
 from flask_security import login_user, logout_user, current_user
 from http import HTTPStatus
+
 from .forms import AdminLoginForm, SearchItemCodeForm, ConfirmItemForm
 from UserApp.models import User
 from CaseApp.models import Inventory, ItemSchema, Item
-from settings import db,app
+from settings import db, app
+from AdminApp.utils import list_thumbnail, imagename_uuid1_gen
 
 item_schema = ItemSchema(many=True)
+
 
 @app.route('/admin/login', endpoint='admin.login', methods=['GET', 'POST'])
 def admin_login():
@@ -24,10 +27,12 @@ def admin_login():
 
     return render_template('admin/login.html', form=form)
 
+
 @app.route('/admin/logout', endpoint='admin.logout', methods=['GET'])
 def admin_login():
     logout_user()
     return redirect(url_for('admin.login'))
+
 
 class AdminSecurityMixin:
 
@@ -43,30 +48,39 @@ class AdminSecurityMixin:
                 abort(HTTPStatus.FORBIDDEN)
             return redirect(url_for('admin.login'))
 
+
 class EditorSecurityMixin(AdminSecurityMixin):
     def is_accessible(self):
         return (current_user.is_active and current_user.is_authenticated
             and current_user.has_role('admin') and current_user.has_role('editor'))
 
+
 class ModelView(EditorSecurityMixin, BaseModelView):
     pass
+
 
 class UserModelView(ModelView):
     column_list = ('login', '_password', 'roles', 'active')
     form_columns = ('login', 'password', 'roles', 'active')
 
+
 class InventoryModelView(ModelView):
     column_list = ('user', 'item', 'code', 'expiration')
     form_columns = ('user', 'item', 'code', 'expiration')
 
+
 class ItemModelView(ModelView):
-    column_list = ('name', 'description', 'probability', 'expiration_period', 'case')
-    form_columns = ('name', 'description', 'probability', 'expiration_period', 'case')
+    column_list = ('name', 'description',
+                   'probability', 'expiration_period', 'case', 'image')
+    form_columns = ('name', 'description', 'probability',
+                    'expiration_period', 'case', 'image')
+
 
 class AdminView(AdminSecurityMixin, AdminIndexView):
     @expose('/')
     def index(self):
         return super(AdminView, self).index()
+
 
 class ExchangeView(AdminSecurityMixin, BaseView):
     @expose('/', methods=['GET', 'POST'])
@@ -99,3 +113,23 @@ class ExchangeView(AdminSecurityMixin, BaseView):
         print(item_type_info)
 
         return self.render('admin/confirm_item.html', form=confirm_form, item_info=item_type_info)
+
+
+class ImageView(ModelView):
+
+    column_list = [
+        'image', 'name', 'filename', 'size'
+    ]
+
+    column_formatters = {
+        'image': list_thumbnail
+    }
+
+    form_extra_fields = {
+        'filename': form.ImageUploadField(
+            'Image',
+            base_path=app.config['UPLOADED_IMAGES_DEST'],
+            url_relative_path='images/',
+            namegen=imagename_uuid1_gen,
+        )
+    }

@@ -14,6 +14,7 @@ jwt = JWTManager(app)
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 
+
 @app.before_first_request
 def before_first_request():
     # Create the Roles
