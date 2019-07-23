@@ -20,7 +20,7 @@
     "cases": [
         {
             "description": "Скидки на покупку времени",
-            "image": "/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
+            "image": "https://pymole.pythonanywhere.com/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
             "id": 1,
             "name": "Скидки"
         }
@@ -40,38 +40,38 @@
 ~~~json
 {
     "case": {
-        "description": "Скидки на покупку времени",
-        "image": "/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
+        "image": "https://pymole.pythonanywhere.com/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
+        "id": 1,
         "name": "Скидки",
-        "id": 1
+        "description": "Скидки на покупку времени"
     },
     "items": [
         {
-            "name": "Скидка на игру за ПК",
-            "probability": 0.1,
-            "case": 1,
             "expiration_period": 3600,
-            "image": "/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
+            "case": 1,
+            "id": 1,
             "description": "Скидка 20%",
-            "id": 1
+            "image": "https://pymole.pythonanywhere.com/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
+            "probability": 0.1,
+            "name": "Скидка на игру за ПК"
         },
         {
-            "name": "Скидка на игру за консолью",
+            "expiration_period": 3600,
+            "case": 1,
+            "id": 2,
+            "description": "Скидка 30%",
+            "image": null,
             "probability": 0.7,
-            "case": 1,
-            "expiration_period": 3600,
-            "image": null,
-            "description": "Скидка 30%",
-            "id": 2
+            "name": "Скидка на игру за консолью"
         },
         {
-            "name": "Скидка на игру за ПК",
-            "probability": 0.2,
-            "case": 1,
             "expiration_period": 3600,
-            "image": null,
+            "case": 1,
+            "id": 3,
             "description": "Скидка 30%",
-            "id": 3
+            "image": null,
+            "probability": 0.2,
+            "name": "Скидка на игру за ПК"
         }
     ]
 }
@@ -95,7 +95,7 @@
                 "probability": 0.1,
                 "case": 1,
                 "expiration_period": 3600,
-                "image": "/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
+                "image": "https://pymole.pythonanywhere.com/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
                 "description": "Скидка 20%",
                 "id": 1
             },
