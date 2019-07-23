@@ -1,4 +1,4 @@
-from settings import db, images, ma
+from settings import db, images, ma, app
 import os
 from flask_sqlalchemy import event
 
@@ -13,8 +13,7 @@ class Image(db.Model):
 
     @property
     def url(self):
-        i = images.url(self.filename)
-        return i
+        return app.config['DOMAIN'] + images.url(self.filename)
 
     @property
     def filepath(self):

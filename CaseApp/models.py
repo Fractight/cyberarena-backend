@@ -70,7 +70,7 @@ class ItemSchema(ma.ModelSchema):
     image = ma.Method('image_url')
 
     def image_url(self, obj):
-        return obj.image.url
+        return None if obj.image is None else obj.image.url
 
 
 class CaseSchema(ma.ModelSchema):
@@ -81,7 +81,7 @@ class CaseSchema(ma.ModelSchema):
     image = ma.Method('image_url')
 
     def image_url(self, obj):
-        return obj.image.url
+        return None if obj.image is None else obj.image.url
 
 
 class InventorySchema(ma.ModelSchema):

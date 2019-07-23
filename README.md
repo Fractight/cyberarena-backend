@@ -20,8 +20,9 @@
     "cases": [
         {
             "description": "Скидки на покупку времени",
-            "name": "Скидки",
-            "id": 1
+            "image": "/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
+            "id": 1,
+            "name": "Скидки"
         }
     ]
 }
@@ -40,6 +41,7 @@
 {
     "case": {
         "description": "Скидки на покупку времени",
+        "image": "/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
         "name": "Скидки",
         "id": 1
     },
@@ -47,25 +49,28 @@
         {
             "name": "Скидка на игру за ПК",
             "probability": 0.1,
-            "description": "Скидка 20%",
-            "expiration_period": 3600,
             "case": 1,
+            "expiration_period": 3600,
+            "image": "/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
+            "description": "Скидка 20%",
             "id": 1
         },
         {
             "name": "Скидка на игру за консолью",
             "probability": 0.7,
-            "description": "Скидка 30%",
-            "expiration_period": 3600,
             "case": 1,
+            "expiration_period": 3600,
+            "image": null,
+            "description": "Скидка 30%",
             "id": 2
         },
         {
             "name": "Скидка на игру за ПК",
             "probability": 0.2,
-            "description": "Скидка 30%",
-            "expiration_period": 3600,
             "case": 1,
+            "expiration_period": 3600,
+            "image": null,
+            "description": "Скидка 30%",
             "id": 3
         }
     ]
@@ -85,19 +90,34 @@
 {
     "items": [
         {
+            "item": {
+                "name": "Скидка на игру за ПК",
+                "probability": 0.1,
+                "case": 1,
+                "expiration_period": 3600,
+                "image": "/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
+                "description": "Скидка 20%",
+                "id": 1
+            },
             "code": null,
-            "id": 20,
-            "expiration": null,
+            "id": 21,
+            "expiration": null
+        },
+        {
             "item": {
                 "name": "Скидка на игру за консолью",
                 "probability": 0.7,
-                "description": "Скидка 30%",
-                "expiration_period": 3600,
                 "case": 1,
+                "expiration_period": 3600,
+                "image": null,
+                "description": "Скидка 30%",
                 "id": 2
-            }
+            },
+            "code": null,
+            "id": 22,
+            "expiration": null
         }
-    ]
+	]
 }
 ```
 
@@ -111,12 +131,13 @@
 ```json
 {
     "reward": {
-        "name": "Скидка на игру за консолью",
-        "description": "Скидка 30%",
+        "probability": 0.2,
+        "name": "Скидка на игру за ПК",
         "case": 1,
+        "id": 3,
+        "image": null,
         "expiration_period": 3600,
-        "id": 2,
-        "probability": 0.7
+        "description": "Скидка 30%"
     }
 }
 ```
@@ -255,7 +276,7 @@
 
 #### **Обновить токен**
 
-| Эндпоинт                  | /user/token_refresh |
+| Эндпоинт                  | /user/profile |
 | :------------------------ | :------------ |
 | **Метод**                 | GET           |
 | **Требует refresh_token** |               |
@@ -265,5 +286,4 @@
     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NjMzNTYxNDAsIm5iZiI6MTU2MzM1NjE0MCwianRpIjoiMDcyNDRmOGQtMWM3Mi00NjExLWE2MGItNmZkZWM2NjEzOWUxIiwiZXhwIjoxNTYzMzU3MDQwLCJpZGVudGl0eSI6IjQ2MzM3ODU0IiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.3dOIjWC4pRrdbjwRQ9JnQ0luls2rC6J8rTDCwjf_qME"
 }
 ```
-
 

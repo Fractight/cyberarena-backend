@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import IMAGES, UploadSet, configure_uploads, patch_request_class
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config.from_object('config.LocalConfig')
 
 db = SQLAlchemy()
 db.init_app(app)
