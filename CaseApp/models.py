@@ -67,7 +67,10 @@ class ItemSchema(ma.ModelSchema):
     class Meta:
         model = Item
 
-    image = ma.Nested(ImageSchema, only=['url'])
+    image = ma.Method('image_url')
+
+    def image_url(self, obj):
+        return obj.image.url
 
 
 class CaseSchema(ma.ModelSchema):
@@ -75,13 +78,17 @@ class CaseSchema(ma.ModelSchema):
         model = Case
         exclude = ('items',)
 
-    image = ma.Nested(ImageSchema, only=['url'])
+    image = ma.Method('image_url')
+
+    def image_url(self, obj):
+        return obj.image.url
 
 
 class InventorySchema(ma.ModelSchema):
     class Meta:
         model = Inventory
         exclude = ('user',)
+
     item = ma.Nested(ItemSchema)
 
 

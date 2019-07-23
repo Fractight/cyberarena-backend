@@ -118,7 +118,7 @@ class ExchangeView(AdminSecurityMixin, BaseView):
 class ImageView(ModelView):
 
     column_list = [
-        'image', 'name', 'filename', 'size'
+        'name', 'filename', 'size', 'image'
     ]
 
     column_formatters = {

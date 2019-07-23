@@ -5,15 +5,15 @@ from flask_sqlalchemy import event
 
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
     filename = db.Column(db.String(128), unique=True)
 
     def __repr__(self):
-        return self.filename
+        return '' if self.name is None else self.name
 
     @property
     def url(self):
         i = images.url(self.filename)
-        print(i)
         return i
 
     @property
