@@ -7,6 +7,7 @@ from settings import db, app
 from UserApp.app import user_datastore
 import requests
 
+
 class VKAuth(Resource):
     def get(self):
         code = flask_request.args.get('code')

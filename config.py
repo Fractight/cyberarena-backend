@@ -9,7 +9,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     JWT_SECRET_KEY = 'qsdadqw123ftru365kfsseak5'
-    JWT_ACCESS_TOKEN_EXPIRES = False
+    JWT_ERROR_MESSAGE_KEY = 'error'
 
     VK_CLIENT_ID = 6983724
     VK_CLIENT_SECRET = 'O24pgK0wTIa0JpivuUvi'
@@ -25,9 +25,11 @@ class LocalConfig(Config):
     DEBUG = True
     DOMAIN = 'http://25.55.106.136:5000'
     SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:l1light2KiRa@localhost:3306/cyberarena"
+    JWT_ACCESS_TOKEN_EXPIRES = False
 
 
 class ProductionConfig(Config):
     DEBUG = False
     DOMAIN = 'https://pymole.pythonanywhere.com'
     SQLALCHEMY_DATABASE_URI = "mysql+pymysql://Pymole:l1light2KiRa@Pymole.mysql.pythonanywhere-services.com/Pymole$cyberarena"
+    JWT_ACCESS_TOKEN_EXPIRES = datetime.timedelta(minutes=15)

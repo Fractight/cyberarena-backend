@@ -36,4 +36,4 @@ class CaseOpen(Resource):
         db.session.commit()
         reward = item_schema.dump(reward).data
 
-        return { 'reward': reward }, 201
+        return {'reward': reward}, 201

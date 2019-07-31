@@ -60,6 +60,8 @@ class Inventory(db.Model):
 
     @hybrid_property
     def expires_in(self):
+        if self.expiration is None:
+            return None
         return (self.expiration - datetime.datetime.now()).total_seconds()
 
 
@@ -87,7 +89,7 @@ class CaseSchema(ma.ModelSchema):
 class InventorySchema(ma.ModelSchema):
     class Meta:
         model = Inventory
-        exclude = ('user',)
+        fields = ('id', 'expires_in', 'code', 'item')
 
     item = ma.Nested(ItemSchema)
 

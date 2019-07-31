@@ -91,31 +91,31 @@
     "items": [
         {
             "item": {
-                "name": "Скидка на игру за ПК",
                 "probability": 0.1,
-                "case": 1,
+                "image": "http://25.55.106.136:5000/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
+                "name": "Скидка на игру за ПК",
                 "expiration_period": 3600,
-                "image": "https://pymole.pythonanywhere.com/static/images/c9fb744c-ab8f-11e9-8c80-3085a94938f9.png",
-                "description": "Скидка 20%",
-                "id": 1
+                "id": 1,
+                "case": 1,
+                "description": "Скидка 20%"
             },
-            "code": null,
-            "id": 21,
-            "expiration": null
+            "code": "25OXL",
+            "expires_in": -700215.997901,
+            "id": 21
         },
         {
             "item": {
-                "name": "Скидка на игру за консолью",
                 "probability": 0.7,
-                "case": 1,
-                "expiration_period": 3600,
                 "image": null,
-                "description": "Скидка 30%",
-                "id": 2
+                "name": "Скидка на игру за консолью",
+                "expiration_period": 3600,
+                "id": 2,
+                "case": 1,
+                "description": "Скидка 30%"
             },
-            "code": null,
-            "id": 22,
-            "expiration": null
+            "code": "PFVOZ",
+            "expires_in": 2229.001099,
+            "id": 22
         }
 	]
 }
