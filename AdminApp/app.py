@@ -3,7 +3,7 @@ from flask_admin import Admin
 from settings import app
 from .views import *
 from UserApp.models import User
-from CaseApp.models import Item, Case, Inventory
+from CaseApp.models import Item, Case, Inventory, CaseCooldown
 from NewsApp.models import News
 from ImageApp.models import Image
 
@@ -14,6 +14,7 @@ admin.add_view(ModelView(Case, db.session))
 admin.add_view(InventoryModelView(Inventory, db.session))
 admin.add_view(ModelView(News, db.session))
 admin.add_view(ImageView(Image, db.session))
+admin.add_view(ModelView(CaseCooldown, db.session))
 
 admin.add_view(ExchangeView(name='Exchange', endpoint='exchange'))
 
