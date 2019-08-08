@@ -2,6 +2,7 @@ from flask_restful import Resource
 from NewsApp.models import News
 from flask import request
 
+
 class NewsResource(Resource):
     def get(self):
         offset = request.args.get('offset')
@@ -26,6 +27,5 @@ class NewsResource(Resource):
         count = max(1, min(20, count))
         offset = max(0, offset)
 
-        print(offset, count)
         news_query = News.query.offset(offset).limit(count).all()
         return {'news': [n.vk_json for n in news_query]}, 200

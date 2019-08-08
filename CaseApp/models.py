@@ -73,7 +73,7 @@ class Inventory(db.Model):
         self.expiration = datetime.now() + \
                           timedelta(seconds=Item.query.get(self.item_id).expiration_period)
         db.session.commit()
-        return {'item_id':self.id, 'code': self.code, 'expires_in': self.expires_in}
+        return {'item_id': self.id, 'code': self.code, 'expires_in': self.expires_in}
 
     @hybrid_property
     def expires_in(self):

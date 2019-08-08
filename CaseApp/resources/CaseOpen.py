@@ -54,4 +54,4 @@ class CaseOpen(Resource):
 
         reward = item_schema.dump(reward).data
 
-        return {'reward': reward}, 201
+        return {'id': inv.id, 'item': reward}, 201
